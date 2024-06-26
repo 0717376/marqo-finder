@@ -166,6 +166,7 @@
             currentPage = page;
 
             loadingIndicator.style.display = 'block';
+            resultsContainer.innerHTML = ''; // Очищаем результаты перед новым поиском
 
             const response = await fetch('/', {
                 method: 'POST',
@@ -176,7 +177,6 @@
             });
 
             const data = await response.json();
-            resultsContainer.innerHTML = '';
 
             data.results.forEach((hit) => {
                 const result = document.createElement('div');
@@ -184,13 +184,13 @@
 
                 const title = document.createElement('a');
                 title.classList.add('title');
-                title.href = hit.URL;
+                title.href = hit.URL.replace('http://srv-captain--gitlab', 'https://gitlab.muravskiy.com');
                 title.target = '_blank';
                 title.textContent = hit.Title;
 
                 const url = document.createElement('div');
                 url.classList.add('url');
-                url.textContent = hit.URL.replace(/^https?:\/\//, '');
+                url.textContent = hit.URL.replace('http://srv-captain--gitlab', 'https://gitlab.muravskiy.com').replace(/^https?:\/\//, '');
 
                 const highlight = document.createElement('div');
                 highlight.classList.add('highlight');
