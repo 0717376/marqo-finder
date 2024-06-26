@@ -1,0 +1,113 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+}
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+.search-form input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    padding-right: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.search-form button {
+    width: 30%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    transition: background-color 0.3s;
+}
+.search-form button:hover {
+    background-color: #45a049;
+}
+.clear-icon {
+    position: absolute;
+    top: 50%;
+    right: 32%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+    color: #999;
+    font-size: 20px;
+}
+.result {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+.title {
+    font-size: 18px;
+    color: #1a0dab;
+    text-decoration: none;
+    margin-bottom: 5px;
+    display: block;
+}
+.url {
+    font-size: 14px;
+    color: #006621;
+    margin-bottom: 10px;
+}
+.highlight {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.score {
+    color: #888;
+    font-size: 12px;
+}
+.loading {
+    text-align: center;
+    margin-top: 20px;
+}
+.loading i {
+    font-size: 24px;
+    color: #4CAF50;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination a {
+    padding: 5px 10px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
