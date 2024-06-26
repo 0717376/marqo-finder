@@ -151,22 +151,28 @@
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            performSearch();
+            performSearch(1);
         });
 
         clearIcon.addEventListener('click', () => {
             queryInput.value = '';
-            resultsContainer.innerHTML = '';
-            paginationContainer.innerHTML = '';
+            clearResults();
             clearIcon.style.display = 'none';
         });
+
+        function clearResults() {
+            resultsContainer.innerHTML = '';
+            paginationContainer.innerHTML = '';
+            totalHits = 0;
+            currentPage = 1;
+        }
 
         async function performSearch(page = 1) {
             const query = queryInput.value;
             currentPage = page;
 
             loadingIndicator.style.display = 'block';
-            resultsContainer.innerHTML = ''; // Очищаем результаты перед новым поиском
+            clearResults();
 
             const response = await fetch('/', {
                 method: 'POST',
@@ -178,7 +184,19 @@
 
             const data = await response.json();
 
-            data.results.forEach((hit) => {
+            displayResults(data.results);
+
+            totalHits = data.total_hits;
+            renderPagination();
+
+            window.scrollTo(0, 0);
+
+            loadingIndicator.style.display = 'none';
+            clearIcon.style.display = 'block';
+        }
+
+        function displayResults(results) {
+            results.forEach((hit) => {
                 const result = document.createElement('div');
                 result.classList.add('result');
 
@@ -194,7 +212,7 @@
 
                 const highlight = document.createElement('div');
                 highlight.classList.add('highlight');
-                highlight.textContent = truncateText(hit.Content, 300);  // Ограничиваем количество символов
+                highlight.textContent = truncateText(hit.Content, 300);
 
                 const score = document.createElement('div');
                 score.classList.add('score');
@@ -207,14 +225,6 @@
 
                 resultsContainer.appendChild(result);
             });
-
-            totalHits = data.total_hits;
-            renderPagination();
-
-            window.scrollTo(0, 0);
-
-            loadingIndicator.style.display = 'none';
-            clearIcon.style.display = 'block';
         }
 
         function truncateText(text, maxLength) {
