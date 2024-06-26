@@ -21,10 +21,12 @@ def search():
         offset = (page - 1) * per_page
         
         # Выполнение поиска
-        results = mq.index("my-markdown-index").search(q=query, limit=per_page, offset=offset)
+        results = mq.index("my-markdown-index").search(q=query, limit=100)
         
-        total_hits = results['estimated_total_hits']
-        paginated_results = results['hits']
+        total_hits = len(results['hits'])
+        start = offset
+        end = offset + per_page
+        paginated_results = results['hits'][start:end]
         
         return jsonify({'results': paginated_results, 'total_hits': total_hits})
     return render_template('index.html')
